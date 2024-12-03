@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Rate Art</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+</head>
+<body>
+    <h1>Latest Heart Rate Data</h1>
+    {% if data %}
+        <p>Heart Rate: {{ data['heart_rate'] }}</p>
+        <p>Body Temperature: {{ data['temperature'] }}</p>
+        
+        {% if art_exists %}
+            <img src="/static/images/current_art.png?{{ current_time }}" alt="Generated Art" />
+        {% else %}
+            <p>No art generated yet.</p>
+        {% endif %}
+        
+        {% if qr_exists %}
+            <img src="/static/images/qrcode.png?{{ current_time }}" alt="QR Code" />
+        {% else %}
+            <p>No QR code generated yet.</p>
+        {% endif %}
+        
+    {% else %}
+        <p>No data received yet.</p>
+    {% endif %}
+</body>
+</html>
